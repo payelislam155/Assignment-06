@@ -77,7 +77,7 @@ pets.forEach((pet) => {
           <p class="border-t border-gray-300"></p>
           <div class="flex items-center justify-between mb-10">
              <button onclick="loadLike('${pet.petId}')"><img class="border border-gray-300 p-2 rounded-lg" src="images/like.png"></button>
-             <button onclick="loadAdopt('${pet.petId}')" class="border border-gray-300 text-green-800 font-semibold p-2 rounded-lg">Adopt</button>
+            <button onclick="displayAdoptsShow('${pet.petId}')" class="border border-gray-300 text-green-800 font-semibold p-2 rounded-lg">Adopt</button>
              <button onclick="loadDetailsCard('${pet.petId}')" class="border border-gray-300 text-green-800 font-semibold p-2 rounded-lg">Details</button>
           </div>
       </div>
@@ -85,6 +85,26 @@ pets.forEach((pet) => {
   // Add the card to the container
   cardContainer.appendChild(card);
 });
+};
+const displayAdoptsShow = (adopt) => {
+    document.getElementById("customModalAdopt").showModal(); // Ensure the modal exists in your HTML
+    const modalAdoptContent = document.getElementById('modal-adopt-content'); // Ensure this ID exists as well
+    modalAdoptContent.innerHTML = `
+      <img class="w-40 mx-auto" src="https://img.icons8.com/?size=60&id=bj030009m8Sv&format=png" />
+      <p class="text-center text-4xl my-3 font-bold">Congrats</p> <!-- Fixed spelling from "Congrates" to "Congrats" -->
+      <p class="text-lg text-gray-600 my-3 font-semibold">Adoption process is starting for your pet.</p> <!-- Fixed capitalization for consistency -->
+      <h1 id="count-btn" class="text-5xl text-center"></h1>
+    `;
+    let count = 4;
+    const counter = setInterval(function() {
+        count--;
+        document.getElementById('count-btn').innerText = count;
+        if(count <= 0) {
+            clearInterval(counter);
+            document.getElementById("customModalAdopt").close(); // Uncomment to close the modal after countdown finishes
+        }
+        console.log(count);
+    }, 1000);
 };
 
 // {/* <p>${pet.pet_details}</p> */}
@@ -125,27 +145,6 @@ loadcardsCatagories();
 //       .catch(error => console.error(error));
 //   };
   
-//   const displayAdoptsShow = (adopt) => {
-//     console.log(adopt);
-//     document.getElementById("customModalAdopt").showModal();
-//     const modalAdoptContent = document.getElementById('modal-adopt-content');
-//     modalAdoptContent.innerHTML = `
-//       <img class="w-40 mx-auto" src="https://img.icons8.com/?size=60&id=bj030009m8Sv&format=png" />
-//       <p class="text-center text-4xl my-3 font-bold">Congrates</p>
-//       <p class="text-lg text-gray-600 my-3 font-semibold">Adoption Process is Start For Your Pet</p>
-//       <h1 id="count-btn" class="text-5xl text-center"></h1>
-//     `;
-//     let count = 4;
-//     const counter = setInterval(function() {
-//       count--;
-//       document.getElementById('count-btn').innerText = count;
-//       if(count <= 0) {
-//         clearInterval(counter);
-//         // document.getElementById("customModalAdopt").close();
-//       }
-//       console.log(count);
-//     }, 1000);
-//   };
 
 
 //   const loadDisplayAdopt = async (id) => {
@@ -182,3 +181,30 @@ loadcardsCatagories();
 //   };
 
 //   displayAdoptsShow()
+
+//--------------------------------------------------------------------------------------------------------------------------------
+
+                    //   adobt moldal timer
+    // const displayAdoptsShows= (pets) => {
+    //     console.log(pets);
+    //     // document.getElementById("customModalAdopt").showModal();
+    
+    //     const modalAdoptContent = document.getElementById("modal-adopt-content");
+    //     modalAdoptContent.innerHTML = `
+    //         <img class="w-40 mx-auto" src="https://img.icons8.com/?size=60&id=bj0330D9m8Sv&format=png" />
+    //         <p class="text-center text-4xl my-3 font-bold">Congratulations</p>
+    //         <p class="text-center lg:text-xl text-sm text-gray-600 my-3 font-semibold">Adoption Process is Started For Your Pet</p>
+    //         <h1 id="count-btn" class="text-5xl text-center"></h1>
+    //     `;
+    //     document.getElementById("customModalAdopt").close();
+    //     let count = 4; // Set the countdown timer
+    //     const counter = setInterval(function() {
+    //         count--;
+    //         document.getElementById('count-btn').innerText = count;
+    //         if (count <= 0) {
+    //             clearInterval(counter);
+    //          // Close the modal when countdown reaches zero
+    //             console.log(count);
+    //         }
+    //     }, 1000); // Count down every second
+    // };

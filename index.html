@@ -62,22 +62,22 @@
         </div>
     </header>
       <main class="w-11/12 mx-auto mt-6 mb-12">
-           <div class="max-w-[600px] mx-auto">
-                 <h3 class="text-2xl font-bold text-center">Adopt  Your  Best Friend</h3>
-                 <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+           <div class="max-w-[750px] mx-auto space-y-3">
+                 <h3 class="text-4xl font-bold text-center">Adopt  Your  Best Friend</h3>
+                 <p class="text-xl">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
            </div>
-            <div class="w-11/12 mx-auto cursor-pointer flex justify-between mb-6 mt-8" id="catagories"></div>
-            <div class="w-11/12 mx-auto">
+            <div class="cursor-pointer flex justify-between mb-6 mt-8" id="catagories"></div>
+            <div class="">
                   <div class="flex justify-between items-center">
                       <h1 class="text-xl font-bold">Best Deal For you</h1>
                       <button class="btn btn-success font-bold text-white">Sort by Price</button>
                   </div>
             </div>
                             <!-- loading -->
-             <!-- <div id="loading-indicator" class="loading-indicator text-center mt-10">
+             <div id="loading-indicator" class="loading-indicator text-center mt-10">
                 <span class="loading loading-bars loading-mg"></span>
                 <span class="loading loading-bars loading-lg"></span>
-             </div> -->
+             </div>
             <div id ="allCardArea" class="w-full border-2 border-red-800 grid grid-cols-4 mt-10 p-2">
                  <div id="CardsPets" class="border border-gray-200 rounded-lg col-span-3 grid grid-cols-3 gap-2">
         
@@ -86,19 +86,13 @@
 
                  </div>        
            </div>
-             <!-- Adopt modal show -->
-             <button class="text-9xl text-red-950" onclick="my_modal_5.showModal()">open modal</button>
-             <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-                 <div class="modal-box">
-                           <h3 class="text-lg font-bold">Hello!</h3>
-                           <p class="py-4">Press ESC key or click the button below to close</p>
-                   <div class="modal-action">
-                      <form method="dialog">
-                           <button class="btn">Close</button>
-                      </form>
-                   </div>
-                 </div>
-             </dialog>  
+                           <!-- Adopt modal show -->
+            <dialog id="customModalAdopt" class="modal modal-bottom sm:modal-middle">
+             <div id="modal-adopt-content" class="modal-box">
+              <div class="modal-action">
+              </div>
+             </div>
+            </dialog>
 
       </main>
                              <!-- footer section -->
