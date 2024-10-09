@@ -7,6 +7,7 @@ const loadCategorys = () => {
   
   const displayCategories = (categories) => {
     const categoryContainer = document.getElementById("catagories");
+    categoryContainer.innerHTML = ''; // Clear existing categories
     categories.forEach((item) => {
         // Create a card div for each category
         const card = document.createElement("div");
@@ -15,32 +16,26 @@ const loadCategorys = () => {
         // Create a button 
         const button = document.createElement("button");
         button.classList = `flex gap-2 items-center px-16 py-3 font-bold text-2xl`;
-        button.innerHTML = `<img class="size-10" src="${item.category_icon}"/> ${item.category}`;
+        button.innerHTML = `<img class="size-10" src="${item.category_icon}"/>${item.category}`;
         
-        // Add an onclick event with a delay and loading indicator
         button.onclick = () => {
-            // Show loading indicator
-            const loadingIndicator = document.getElementById("loadingIndicator");
-            loadingIndicator.style.display = "block";
+            // Show loading spinner
+            document.getElementById("loading-indicator").style.display = "block";
 
+            // Hide category cards
+            const cardContainer = document.getElementById("CardsPets");
+            cardContainer.innerHTML = ''; // Clear existing cards
+            cardContainer.style.display = "none"; // Hide cards during loading
+
+            // Load category cards after a delay
             setTimeout(() => {
-                loadCategorysCard(item.category)
-                    .then(() => {
-                        // Hide loading indicator once done
-                        loadingIndicator.style.display = "none";
-                        console.log("Category loaded");
-                    })
-                    .catch(err => {
-                        console.error("Error loading category:", err);
-                        loadingIndicator.style.display = "none"; // Hide on error as well
-                    });
-            }, 5000); // 5000 milliseconds = 5 seconds
+                loadCategorysCard(item.category); // fetch the new category
+                document.getElementById("loading-indicator").style.display = "none"; // Hide loading spinner
+            }, 3000); 
         };
 
-        // Append the button to the card
-        card.appendChild(button);
-        // Add the card to the category container
         categoryContainer.appendChild(card);
+        card.appendChild(button);
     });
 };
 
