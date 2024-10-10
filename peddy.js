@@ -25,14 +25,16 @@ const displayCategories = (categories) => {
         const btn = document.getElementById("loading-indicator");
         btn.classList.add('hidden');
         button.onclick = () => {
+            const cardContainer = document.getElementById("allCardArea");
+            cardContainer.classList.add('hidden');
             document.getElementById("loading-indicator").style.display = "block";
             setTimeout(() => {
                 loadCategorysCard(item.category);
                 document.getElementById("loading-indicator").style.display = "none";
-                cardContainer.style.display = "block";
+                cardContainer.classList.remove('hidden');
+                // const likeButton = document.getElementById('likeButton');
+                // likeButton.style.display = "block";
             },3000);
-            const cardContainer = document.getElementById("CardsPets");
-            cardContainer.style.display = "none";
         };
         categoryContainer.appendChild(card);
         card.appendChild(button);
@@ -47,7 +49,6 @@ const loadcardsCatagories = () => {
 };
 
 const displayCards = (pets) => {
-    console.log(pets)
 const cardContainer = document.getElementById("CardsPets");
 cardContainer.classList.add("w-[836px]")
     cardContainer.innerHTML = '';
@@ -73,11 +74,36 @@ cardContainer.classList.add("w-[836px]")
                 </div>
             </div>
         `;
-         // Add the card to the container
-     cardContainer.appendChild(card);
-    });
+                // Add the card to the container append all child 
+            cardContainer.appendChild(card);
+    }); 
 };
-        //  like button works
+                    //    details modal
+const loadDetailsCard = (petId) => {
+    console.log(petId)
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const pet = data.petData; 
+            
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+            <div class="flex flex-col items-center">
+                <img class="w-40 rounded-lg" src="${pet.image}" alt="${pet.pet_name}" />
+                <h2 class="text-2xl font-bold mt-3">${pet.pet_name}</h2>
+                <p class="text-lg">Breed: ${pet.breed ? pet.breed : 'Not Available'}</p>
+                <p class="text-lg">Vaccinated: ${pet.vaccinated ? 'Yes' : 'No'}</p>
+                <p class="text-lg">Birth: ${pet.date_of_birth ? pet.date_of_birth : 'Not Available'}</p>
+                <p class="text-lg">Price: ${pet.price !== null ? pet.price : 'Not Mentioned'}</p>
+            </div>
+           `;
+             document.getElementById("customModal").showModal();
+        })
+        .catch(error => console.error('Error fetching data:', error));
+};
+         //  like button works
 const loadLike = ((imgItem) => {
     const likeButton = document.getElementById('likeButton');
     const like = document.createElement('div');
@@ -87,7 +113,7 @@ const loadLike = ((imgItem) => {
     `;
     likeButton.appendChild(like);
 });
-        //adobt moldal timer
+         //adobt moldal timer
 const displayAdoptsShow = (adopt) => {
 document.getElementById("customModalAdopt").showModal(); 
 const modalAdoptContent = document.getElementById('modal-adopt-content'); 
@@ -109,21 +135,7 @@ const counter = setInterval(function() {
     console.log(count);
 }, 1000);
 };
-        //details moldal card
-const loadDetailsCard = (details) => {
-      document.getElementById("customModalDetails").showModal(); 
-      const modalDetailsContent = document.getElementById('modal-details-content'); 
-      modalDetailsContent.innerHTML = `
-        <div class="h-screen">
-              <div class="flex flex-col items-center justify-center h-full">
-                    <div class="flex items-center gap-4 w-full">
-                          <img class="w-32 h-32 rounded-full" src="https://placekitten.com/200/300"/>
-                          <div class="flex flex-col">
-                                <h1 class="text-3xl font-bold">Kitten Name</h1>
-                                <p class="text-lg text-gray-600">Breed: Normal Breed</p>
-                                <p class="text-lg text-gray-600">Birth: 2022-02-1 
-    `
-}       
+
 loadCategorys();
 loadcardsCatagories();
 
