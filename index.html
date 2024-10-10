@@ -70,7 +70,7 @@
             <div class="">
                   <div class="flex justify-between items-center">
                       <h1 class="text-xl font-bold">Best Deal For you</h1>
-                      <button class="btn btn-success font-bold text-white">Sort by Price</button>
+                      <button id="sort-button" class="btn btn-success font-bold text-white">Sort by Price</button>
                   </div>
             </div>
                             <!-- loading -->
@@ -84,24 +84,27 @@
                  </div>
                  <div id="likeButton" class="border border-gray-300 grid grid-cols-2 self-start rounded-lg p-2">
 
-                 </div>        
-           </div>
+                 </div> 
+                
                            <!-- Adopt modal show -->
-            <dialog id="customModalAdopt" class="modal modal-bottom sm:modal-middle">
-             <div id="modal-adopt-content" class="modal-box">
-              <div class="modal-action">
-              </div>
-             </div>
-            </dialog>
-                           <!-- Details modal show -->
-            <dialog id="customModal" class="modal">
-                <div class="modal-box">
-                   <div id="modal-content"></div>
-                 <div class="modal-action">
-                 </div>
-                </div>
-            </dialog> 
-                        
+                <dialog id="customModalAdopt" class="modal modal-bottom sm:modal-middle">
+                    <div id="modal-adopt-content" class="modal-box">
+                         <div class="modal-action">
+                     </div>
+                    </div>
+                </dialog>
+                 <!-- Details modal show -->
+                 <dialog id="customModal" class="modal">
+                    <div class="modal-box">
+                      <div id="modal-content"></div>
+                      <div class="modal-action">
+                              <form method="dialog">
+                                 <button class="btn">Close</button>
+                              </form>
+                      </div>
+                    </div>
+                </dialog>      
+           </div>       
       </main>
                              <!-- footer section -->
       <footer class=" bg-black">
@@ -155,6 +158,6 @@
                     </div>
               </div>
       </footer>
-       <script src="peddy.js"></script>
+       <script src="pratise.js"></script>
 </body>
 </html>
