@@ -18,17 +18,30 @@ const loadCategorysCard = async (Id) => {
 // Display categories in the UI
 const displayCategories = (categories) => {
     const categoryContainer = document.getElementById("catagories");
-    categories.forEach((item) => {
+    let lastClickedButton = null; 
 
+    categories.forEach((item) => {
         const card = document.createElement("div");
-        card.classList = "flex items-center relative border rounded-lg active:rounded-full active:border-2 active:border-green-400 active:bg-green-200 active:duration-200 active:delay-10 ease-out px-4 m-2";
+        card.classList = "flex items-center relative border rounded-lg px-4 m-2";
 
         const button = document.createElement("button");
-        button.classList = `flex gap-2 items-center px-16 py-3 font-bold text-2xl`;
+        button.classList = `flex gap-2 items-center px-16 py-3 font-bold text-2xl transition-colors duration-300`; // Add transition for smooth color change
         button.innerHTML = `<img class="size-10" src="${item.category_icon}"/>${item.category}`;
         const btn = document.getElementById("loading-indicator");
         btn.classList.add('hidden');
         button.onclick = () => {
+            if (lastClickedButton) {
+                lastClickedButton.classList.remove('border-2','border-green-400','bg-green-100','rounded-full',); 
+                const lastCard = lastClickedButton.parentElement;
+                lastCard.classList.remove('border-none'); 
+                lastCard.classList.add('border'); 
+            }
+
+            button.classList.add('border-2','border-green-400','bg-green-100', 'rounded-full',); 
+            const currentCard = button.parentElement; 
+            currentCard.classList.remove('border'); 
+            currentCard.classList.add('border-none'); 
+
             const cardContainer = document.getElementById("allCardArea");
             cardContainer.classList.add('hidden');
             document.getElementById("loading-indicator").style.display = "block";
@@ -36,15 +49,13 @@ const displayCategories = (categories) => {
                 loadCategorysCard(item.category);
                 document.getElementById("loading-indicator").style.display = "none";
                 cardContainer.classList.remove('hidden');
-                // const likeButton = document.getElementById('likeButton');
-                // likeButton.style.display = "block";
-            },3000);
+            }, 3000);
         };
+
         categoryContainer.appendChild(card);
         card.appendChild(button);
     });
 };
-
 // Load all pet cards when the page starts
 const loadcardsCatagories = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
