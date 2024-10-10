@@ -1,9 +1,12 @@
+// Load categories from API and display them
 const loadCategorys = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/categories")
         .then(response => response.json())
         .then(data => displayCategories(data.categories))
         .catch(error => console.log(error));
 };
+
+// Load pet cards based on selected category
 const loadCategorysCard = async (Id) => {
     const url = `https://openapi.programming-hero.com/api/peddy/category/${Id}`;
     console.log(Id);
@@ -12,10 +15,11 @@ const loadCategorysCard = async (Id) => {
     displayCards(data.data);
 };
 
-// Display categories
+// Display categories in the UI
 const displayCategories = (categories) => {
     const categoryContainer = document.getElementById("catagories");
     categories.forEach((item) => {
+
         const card = document.createElement("div");
         card.classList = "flex items-center relative border rounded-lg active:rounded-full active:border-2 active:border-green-400 active:bg-green-200 active:duration-200 active:delay-10 ease-out px-4 m-2";
 
@@ -32,6 +36,8 @@ const displayCategories = (categories) => {
                 loadCategorysCard(item.category);
                 document.getElementById("loading-indicator").style.display = "none";
                 cardContainer.classList.remove('hidden');
+                // const likeButton = document.getElementById('likeButton');
+                // likeButton.style.display = "block";
             },3000);
         };
         categoryContainer.appendChild(card);
@@ -39,7 +45,7 @@ const displayCategories = (categories) => {
     });
 };
 
-// Load all pet cards
+// Load all pet cards when the page starts
 const loadcardsCatagories = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then(response => response.json())
@@ -74,11 +80,13 @@ const displayCards = (pets) => {
                     </div>
                 </div>
             `;
+                    // Add the card to the container append all child 
                 cardContainer.appendChild(card);
         }); 
 };
 
-                    //details modal
+// Load pet details for a specific pet
+                    //    details modal
 const loadDetailsCard = (petId) => {
     console.log(petId)
     fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
@@ -103,7 +111,7 @@ const loadDetailsCard = (petId) => {
         })
         .catch(error => console.error('Error fetching data:', error));
 };
-// Display Image like button
+// Handle the "like" feature
 const loadLike = (imgItem) => {
     const likeButton = document.getElementById('likeButton');
     const like = document.createElement('div');
@@ -112,7 +120,7 @@ const loadLike = (imgItem) => {
     likeButton.appendChild(like);
 };
 
-// Display adoption modal
+// Display adoption modal with a countdown
 const displayAdoptsShow = (adopt) => {
     document.getElementById("customModalAdopt").showModal(); 
     const modalAdoptContent = document.getElementById('modal-adopt-content'); 
@@ -134,7 +142,7 @@ const displayAdoptsShow = (adopt) => {
     }, 1000);
 };
 
-// Sort pets by price (high to low)
+// Sort pets by price (high to low) when button clicked
 const sortByPrice = async () => {
     const url3 = "https://openapi.programming-hero.com/api/peddy/pets";
     
@@ -147,7 +155,9 @@ const sortByPrice = async () => {
         console.error('Error sorting pets:', error);
     }
 };
+
 // Attach event listener to sort button
 document.getElementById('sort-button').addEventListener('click', sortByPrice);
+
 loadCategorys();
 loadcardsCatagories();
