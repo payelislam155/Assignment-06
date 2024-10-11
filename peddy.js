@@ -12,7 +12,7 @@ const loadCategorysCard = async (Id) => {
     displayCards(data.data);
 };
 
-// Display categories
+          // Display categories
 const displayCategories = (categories) => {
     const categoryContainer = document.getElementById("catagories");
     let lastClickedButton = null; 
@@ -22,7 +22,7 @@ const displayCategories = (categories) => {
         card.classList.add("flex", "items-center", "relative", "border", "rounded-lg", "px-4", "m-2");
 
         const button = document.createElement("button");
-        button.classList.add("flex", "gap-2", "items-center", "px-16", "py-3", "font-bold", "text-2xl");
+        button.classList.add("flex", "gap-2", "items-center", "px-16", "py-3", "font-bold", "text-2xl","px-20",);
         button.innerHTML = `<img class="size-10" src="${item.category_icon}"/>${item.category}`;
         
         const btn = document.getElementById("loading-indicator");
@@ -35,7 +35,7 @@ const displayCategories = (categories) => {
                 lastCard.classList.add('border'); 
             }
 
-            button.classList.add('border-2','border-green-400','bg-green-100','rounded-full',); 
+            button.classList.add('border-2','border-green-400','bg-green-100','rounded-full',"lg:px-20","px-24","md:px-28"); 
             const currentCard = button.parentElement; 
             currentCard.classList.remove('border'); 
             currentCard.classList.add('border-none'); 
@@ -54,7 +54,7 @@ const displayCategories = (categories) => {
         categoryContainer.appendChild(card);
         card.appendChild(button);
     });
-};;
+};
 
 // Load all pet cards
 const loadcardsCatagories = () => {
@@ -67,16 +67,16 @@ const loadcardsCatagories = () => {
 // Display pet cards
 const displayCards = (pets) => {
     const cardContainer = document.getElementById("CardsPets");
-    cardContainer.classList.add("w-[836px]")
+    // cardContainer.classList.add("w-[836px]")
      cardContainer.innerHTML = '';
         if (!pets.length) {
             cardContainer.innerHTML = `
-                   <div id="birds" class="card bg-gray-300 text-primary-content flex items-center lg:w-[834px] place-items-center py-20 lg:h-96">
+                   <div id="birds" class="card bg-gray-300 text-primary-content flex items-center lg:w-[834px] md:w-[680px] place-items-center py-20 lg:h-96">
                       <div>
                             <img class="rounded-lg" src="images/error.webp"/>
                       </div>
                       <div class="text-2xl text-black font-bold">No Information Available</div>
-                      <p class="lg:w-[600px] text-black text-xl py-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+                      <p class="p-12 text-black text-xl py-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
                       its layout. The point of using Lorem Ipsum is that it has a.</p>
                   </div>
             `;
@@ -123,7 +123,7 @@ const loadDetailsCard = (petId) => {
             <div class="flex flex-col items-center">
                 <img class="w-full rounded-lg" src="${pet.image}" />
                 <h2 class="text-2xl font-bold mt-3">${pet.pet_name}</h2>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 md:right-2 gap-4">
                      <p class="text-lg flex items-center gap-2"><span><img src="images/breed.png"/></span>Breed:${pet?.breed ? pet?.breed :'Normal Breed'}</p>
                      <p class="text-lg flex items-center gap-2"><span><img src="images/gender.png"/></span>Gender:${pet?.gender == "Male" || pet?.gender == "Female" ? pet?.gender : 'Not Gender'}</p>
                      <p class="text-lg flex items-center gap-2"><span><img src="images/gender.png"/></span>Vaccinated: ${pet.vaccinated ? 'Yes' : 'No'}</p>
@@ -157,7 +157,7 @@ const displayAdoptsShow = (adopt) => {
       <div class="h-40">
             <p class="text-center text-4xl my-3 font-bold">Congrats</p> 
             <p class="text-lg text-center text-gray-600 my-3 font-semibold">Adoption process is starting for your pet.</p>
-            <h1 id="count-btn" class="text-5xl text-center"></h1>
+            <h1 id="count-btn" class="text-6xl font-bold text-center"></h1>
       </div>
     `;
     let count = 4;
