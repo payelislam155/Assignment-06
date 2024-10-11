@@ -68,7 +68,20 @@ const loadcardsCatagories = () => {
 const displayCards = (pets) => {
     const cardContainer = document.getElementById("CardsPets");
     cardContainer.classList.add("w-[836px]")
-        cardContainer.innerHTML = '';
+     cardContainer.innerHTML = '';
+        if (!pets.length) {
+            cardContainer.innerHTML = `
+                   <div id="birds" class="card bg-gray-300 text-primary-content flex items-center lg:w-[834px] place-items-center py-20 lg:h-96">
+                      <div>
+                            <img class="rounded-lg" src="images/error.webp"/>
+                      </div>
+                      <div class="text-2xl text-black font-bold">No Information Available</div>
+                      <p class="lg:w-[600px] text-black text-xl py-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+                      its layout. The point of using Lorem Ipsum is that it has a.</p>
+                  </div>
+            `;
+            return;
+        }
         pets?.forEach((pet) => {
                     // Create All card section
             const card = document.createElement("div");
@@ -91,7 +104,7 @@ const displayCards = (pets) => {
                     </div>
                 </div>
             `;
-                cardContainer.appendChild(card);
+            cardContainer.appendChild(card);
         }); 
 };
 
@@ -108,12 +121,19 @@ const loadDetailsCard = (petId) => {
             
             modalContent.innerHTML = `
             <div class="flex flex-col items-center">
-                <img class="w-40 rounded-lg" src="${pet.image}" alt="${pet.pet_name}" />
+                <img class="w-full rounded-lg" src="${pet.image}" />
                 <h2 class="text-2xl font-bold mt-3">${pet.pet_name}</h2>
-                <p class="text-lg">Breed: ${pet.breed ? pet.breed : 'Not Available'}</p>
-                <p class="text-lg">Vaccinated: ${pet.vaccinated ? 'Yes' : 'No'}</p>
-                <p class="text-lg">Birth: ${pet.date_of_birth ? pet.date_of_birth : 'Not Available'}</p>
-                <p class="text-lg">Price: ${pet.price !== null ? pet.price : 'Not Mentioned'}</p>
+                <div class="grid grid-cols-2 gap-4">
+                     <p class="text-lg flex items-center gap-2"><span><img src="images/breed.png"/></span>Breed:${pet?.breed ? pet?.breed :'Normal Breed'}</p>
+                     <p class="text-lg flex items-center gap-2"><span><img src="images/gender.png"/></span>Gender:${pet?.gender == "Male" || pet?.gender == "Female" ? pet?.gender : 'Not Gender'}</p>
+                     <p class="text-lg flex items-center gap-2"><span><img src="images/gender.png"/></span>Vaccinated: ${pet.vaccinated ? 'Yes' : 'No'}</p>
+                     <p class="text-lg flex items-center gap-2"><span><img src="images/birth.png"/></span>Birth:${pet?.date_of_birth ? pet?.date_of_birth : 'Not Available'}</p>
+                     <p class="text-lg flex items-center gap-2"><span><img src="images/price.png"/></span>Price:${pet?.price !== null ? pet?.price : 'Not Mentioned'}</p>
+                </div>
+                <div class="p-4"> 
+                    <p class="border-t border-gray-300 mb-5"></p>
+                    <p class="text-lg">Breed: ${pet.pet_details ? pet.pet_details: 'Not Available'}</p>
+                 </div>
             </div>
            `;
              document.getElementById("customModal").showModal();
